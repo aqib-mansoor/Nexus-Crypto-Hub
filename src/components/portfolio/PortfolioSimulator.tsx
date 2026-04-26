@@ -38,45 +38,54 @@ export const PortfolioTracker = () => {
   };
 
   return (
-    <Card className="bg-black border border-white/5 shadow-2xl rounded-2xl md:rounded-[2.5rem] overflow-hidden" id="portfolio">
-      <CardHeader className="bg-black p-6 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 border-b border-white/5">
-        <div className="flex items-center gap-4 md:gap-5 w-full md:w-auto">
-          <div className="bg-[#c4ff00] p-2 md:p-3 rounded-xl md:rounded-2xl shrink-0 shadow-[0_0_20px_rgba(196,255,0,0.3)]">
-            <Briefcase className="w-6 h-6 md:w-8 md:h-8 text-black" />
+    <Card className="bg-black border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] rounded-2xl md:rounded-[3rem] overflow-hidden" id="portfolio">
+      <CardHeader className="bg-black p-6 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 border-b border-white/5 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full bg-[#c4ff00]/[0.02] pointer-events-none" />
+        <div className="flex items-center gap-4 md:gap-6 w-full md:w-auto relative z-10">
+          <div className="bg-[#c4ff00] p-2.5 md:p-3.5 rounded-xl md:rounded-[1.5rem] shrink-0 shadow-[0_0_30px_rgba(196,255,0,0.4)]">
+            <Briefcase className="w-6 h-6 md:w-10 md:h-10 text-black" />
           </div>
           <div>
-            <CardTitle className="text-xl md:text-3xl font-black text-white uppercase tracking-tighter">My Ledger</CardTitle>
-            <p className="text-[10px] font-black text-[#c4ff00] uppercase tracking-[0.3em] mt-0.5 md:mt-1 drop-shadow-sm">Live Investment Tracker</p>
+            <CardTitle className="text-2xl md:text-5xl font-black text-white uppercase tracking-tighter leading-none mb-1 md:mb-2">My Ledger</CardTitle>
+            <p className="text-[9px] md:text-xs font-black text-[#c4ff00] uppercase tracking-[0.4em] drop-shadow-sm opacity-80">Institutional Simulation Terminal</p>
           </div>
         </div>
         <Button 
           onClick={() => setIsAdding(!isAdding)}
-          className={`w-full md:w-auto rounded-xl md:rounded-2xl font-black h-12 md:h-14 px-6 md:px-8 transition-all gap-2 text-xs md:text-sm ${isAdding ? 'bg-rose-500 hover:bg-rose-600' : 'bg-[#c4ff00] hover:bg-[#c4ff00]/90 text-black shadow-[0_0_15px_rgba(196,255,0,0.2)]'}`}
+          className={`w-full md:w-auto rounded-xl md:rounded-2xl font-black h-12 md:h-16 px-8 md:px-10 transition-all gap-3 text-xs md:text-sm uppercase tracking-widest relative z-10 ${isAdding ? 'bg-zinc-800 text-white border border-white/10' : 'bg-[#c4ff00] hover:bg-white text-black shadow-lg shadow-[#c4ff00]/10'}`}
         >
-          {isAdding ? <><X className="w-4 h-4 md:w-5 md:h-5 text-white" /> Cancel</> : <><PlusCircle className="w-4 h-4 md:w-5 md:h-5" /> New Asset</>}
+          {isAdding ? <><X className="w-4 h-4 md:w-5 md:h-5" /> Cancel</> : <><PlusCircle className="w-4 h-4 md:w-5 md:h-5" /> Add Liquidity</>}
         </Button>
       </CardHeader>
 
       <CardContent className="p-0">
-        <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/5 bg-white/[0.02]">
-          <StatBox label="Ledger Value" value={totalValue} isCurrency isHighlight={false} percentage={0} />
+        <div className="grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-white/5 bg-white/[0.01]">
+          <StatBox label="Total Assets Controlled" value={totalValue} isCurrency isHighlight={false} percentage={0} />
           <StatBox 
-            label="Net Position" 
+            label="Net Unrealized P/L" 
             value={totalProfit} 
             isCurrency 
             percentage={profitPercentage} 
             isHighlight 
           />
-          <div className="p-6 md:p-10 flex flex-col justify-center">
-            <p className="text-[10px] font-black text-white/30 uppercase tracking-[0.2em] mb-3 md:mb-4">Portfolio Diversity</p>
-            <div className="h-2 md:h-3 w-full bg-white/5 rounded-full overflow-hidden">
+          <div className="p-8 md:p-12 flex flex-col justify-center bg-white/[0.02]">
+            <div className="flex items-center justify-between mb-4">
+              <p className="text-[9px] md:text-[10px] font-black text-white/40 uppercase tracking-[0.3em]">Network Allocation</p>
+              <Badge className="bg-white/10 text-white/50 text-[8px] font-black uppercase tracking-widest border-none">
+                {portfolio.length} Signals
+              </Badge>
+            </div>
+            <div className="h-2.5 w-full bg-white/5 rounded-full overflow-hidden border border-white/5">
               <motion.div 
                 initial={{ width: 0 }}
                 animate={{ width: portfolio.length > 0 ? "100%" : "0%" }}
-                className="h-full bg-[#c4ff00] shadow-[0_0_10px_#c4ff00]"
+                className="h-full bg-gradient-to-r from-[#c4ff00] to-emerald-400 shadow-[0_0_15px_rgba(196,255,0,0.5)]"
               />
             </div>
-            <p className="text-[10px] font-black text-white mt-2">{portfolio.length} Assets Tracked</p>
+            <div className="flex justify-between mt-3">
+              <span className="text-[9px] font-black text-white/20 uppercase tracking-widest">Efficiency: Optimal</span>
+              <span className="text-[9px] font-black text-[#c4ff00] uppercase tracking-widest">v4.2 Sync</span>
+            </div>
           </div>
         </div>
 
@@ -217,18 +226,21 @@ export const PortfolioTracker = () => {
 };
 
 const StatBox = ({ label, value, isCurrency, percentage, isHighlight }: any) => (
-  <div className={`p-6 md:p-10 flex flex-col justify-center ${isHighlight ? 'bg-[#c4ff00]/5' : ''}`}>
-    <p className="text-[10px] font-black text-white/40 uppercase tracking-[0.2em] mb-2">{label}</p>
-    <div className="flex items-baseline gap-2 md:gap-3">
-      <span className={`text-3xl md:text-5xl font-black ${isHighlight ? (value >= 0 ? 'text-[#c4ff00]' : 'text-rose-500') : 'text-white'} tracking-tighter`}>
+  <div className={`p-8 md:p-12 flex flex-col justify-center transition-colors relative group ${isHighlight ? 'bg-[#c4ff00]/[0.02]' : ''}`}>
+    <p className="text-[10px] font-black text-white/30 uppercase tracking-[0.3em] mb-4 group-hover:text-white/50 transition-colors">{label}</p>
+    <div className="flex items-baseline gap-3 md:gap-4 flex-wrap">
+      <span className={`text-4xl md:text-6xl font-black ${isHighlight ? (value >= 0 ? 'text-[#c4ff00]' : 'text-rose-500') : 'text-white'} tracking-tighter leading-none`}>
         {isCurrency && (value >= 0 ? '$' : '-$')}
         {Math.abs(value).toLocaleString(undefined, { maximumFractionDigits: 2 })}
       </span>
       {isHighlight && (
-        <span className={`text-[10px] md:text-sm font-black px-1.5 md:px-2 py-0.5 md:py-1 rounded-lg ${value >= 0 ? 'bg-[#c4ff00]/10 text-[#c4ff00]' : 'bg-rose-500/10 text-rose-500'}`}>
+        <span className={`text-[10px] md:text-sm font-black px-2 md:px-3 py-1 md:py-1.5 rounded-lg md:rounded-xl shadow-lg border border-current/20 ${value >= 0 ? 'bg-[#c4ff00]/10 text-[#c4ff00]' : 'bg-rose-500/10 text-rose-500'}`}>
           {value >= 0 ? '+' : ''}{percentage.toFixed(1)}%
         </span>
       )}
     </div>
+    
+    {/* Subtle indicator decoration */}
+    <div className={`absolute bottom-0 left-0 h-1 bg-current opacity-0 group-hover:opacity-100 transition-all ${isHighlight ? (value >= 0 ? 'text-[#c4ff00]' : 'text-rose-500') : 'text-white/20'}`} style={{ width: '20%' }} />
   </div>
 );

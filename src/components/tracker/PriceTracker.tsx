@@ -29,31 +29,31 @@ export const PriceTracker = () => {
   }).slice(0, 15);
 
   return (
-    <Card className="bg-black/80 shadow-2xl rounded-2xl md:rounded-[3rem] overflow-hidden border border-white/5 backdrop-blur-xl">
-      <CardHeader className="p-6 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 border-b border-white/5">
-        <div className="flex items-center gap-4 md:gap-5 w-full md:w-auto">
-          <div className="bg-[#c4ff00] p-2 md:p-3 rounded-xl md:rounded-2xl shrink-0">
-            <BarChart3 className="w-6 h-6 md:w-8 md:h-8 text-black" />
+    <Card className="bg-black shadow-2xl rounded-2xl md:rounded-[2.5rem] overflow-hidden border border-white/10">
+      <CardHeader className="p-4 md:p-5 lg:p-6 flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4 border-b border-white/5">
+        <div className="flex items-center gap-3 md:gap-4 w-full md:w-auto">
+          <div className="bg-[#c4ff00] p-1.5 md:p-2 rounded-lg md:rounded-xl shrink-0">
+            <BarChart3 className="w-5 h-5 md:w-6 md:h-6 text-black" />
           </div>
           <div>
-            <CardTitle className="text-xl md:text-3xl font-black text-white uppercase tracking-tighter">Market Pulse</CardTitle>
-            <p className="text-[10px] font-black text-[#c4ff00] uppercase tracking-[0.3em] mt-0.5 md:mt-1">Live Institutional Data</p>
+            <CardTitle className="text-xl md:text-2xl font-black text-white uppercase tracking-tighter leading-none mb-1">Market Pulse</CardTitle>
+            <p className="text-[8px] font-black text-[#c4ff00] uppercase tracking-[0.3em] leading-none">Live Alpha Stream</p>
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-4 w-full md:w-auto">
-          <div className="relative w-full md:w-[300px]">
-            <Search className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 text-zinc-500 w-4 h-4 md:w-5 md:h-5 pointer-events-none" />
+        <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
+          <div className="relative w-full md:w-[220px]">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 w-3.5 h-3.5 pointer-events-none" />
             <Input 
               placeholder="Search assets..." 
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-white/5 border-none rounded-xl h-11 md:h-14 pl-12 md:pl-16 pr-4 md:pr-6 font-bold text-base md:text-lg text-white placeholder:text-white/30 focus-visible:ring-2 focus-visible:ring-[#c4ff00]"
+              className="w-full bg-white/5 border-none rounded-lg h-9 md:h-10 pl-10 pr-4 font-bold text-xs md:text-sm text-white placeholder:text-zinc-500 focus-visible:ring-2 focus-visible:ring-[#c4ff00]"
             />
           </div>
           
           <Select value={rankFilter} onValueChange={setRankFilter}>
-            <SelectTrigger className="w-full md:w-[150px] h-11 md:h-14 bg-white/10 border-none rounded-xl font-bold text-white">
+            <SelectTrigger className="w-full md:w-[120px] h-9 md:h-10 bg-white/10 border-none rounded-lg font-bold text-white text-xs">
               <div className="flex items-center gap-2">
                 <Filter className="w-4 h-4 text-[#c4ff00]" />
                 <SelectValue placeholder="All Ranks" />
@@ -71,14 +71,14 @@ export const PriceTracker = () => {
       <CardContent className="p-0">
         <div className="overflow-x-auto scrollbar-hide">
           <Table>
-            <TableHeader className="bg-white/5">
+            <TableHeader className="bg-white/[0.02]">
               <TableRow className="hover:bg-transparent border-white/5">
-                <TableHead className="w-[60px] md:w-[100px] pl-4 md:pl-10 xl:pl-16 text-[9px] md:text-[10px] font-black uppercase tracking-widest text-white/40 py-4 md:py-6 xl:py-10">Rank</TableHead>
-                <TableHead className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-white/40">Asset</TableHead>
-                <TableHead className="text-right text-[9px] md:text-[10px] font-black uppercase tracking-widest text-white/40">Price</TableHead>
-                <TableHead className="text-right text-[9px] md:text-[10px] font-black uppercase tracking-widest text-white/40">24h</TableHead>
-                <TableHead className="hidden md:table-cell text-right text-[9px] md:text-[10px] font-black uppercase tracking-widest text-white/40">Trend</TableHead>
-                <TableHead className="w-12 md:w-[100px] pr-4 md:pr-10"></TableHead>
+                <TableHead className="w-[50px] md:w-[80px] pl-4 md:pl-8 xl:pl-12 text-[8px] md:text-[9px] font-black uppercase tracking-widest text-zinc-500 py-3 md:py-4">#</TableHead>
+                <TableHead className="text-[8px] md:text-[9px] font-black uppercase tracking-widest text-zinc-500">Asset</TableHead>
+                <TableHead className="text-right text-[8px] md:text-[9px] font-black uppercase tracking-widest text-zinc-500">Live Price</TableHead>
+                <TableHead className="text-right text-[8px] md:text-[9px] font-black uppercase tracking-widest text-zinc-500">24h Change</TableHead>
+                <TableHead className="hidden md:table-cell text-right text-[8px] md:text-[9px] font-black uppercase tracking-widest text-zinc-500">7D Trace</TableHead>
+                <TableHead className="w-12 md:w-[80px] pr-4 md:pr-8"></TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -109,40 +109,40 @@ export const PriceTracker = () => {
                       layout: { duration: 0.2 },
                       opacity: { duration: 0.2 }
                     }}
-                    className={`group border-white/5 transition-all h-16 md:h-20 relative select-none ${
+                    className={`group border-white/[0.03] transition-all h-12 md:h-14 relative select-none ${
                       coin.price_change_percentage_24h >= 0 
-                        ? 'bg-[#c4ff00]/[0.02]' 
-                        : 'bg-rose-500/[0.02]'
+                        ? 'bg-[#c4ff00]/[0.01]' 
+                        : 'bg-rose-500/[0.01]'
                     }`}
                   >
-                    <TableCell className="pl-4 md:pl-10 xl:pl-16 font-bold md:font-black text-white/20 text-sm md:text-base">#{coin.market_cap_rank}</TableCell>
+                    <TableCell className="pl-4 md:pl-8 xl:pl-12 font-black text-white/10 text-[10px] md:text-xs">#{coin.market_cap_rank}</TableCell>
                     <TableCell>
-                      <div className="flex items-center gap-3 md:gap-4">
-                        <div className="w-8 h-8 md:w-10 md:h-10 bg-white/5 p-1 md:p-2 rounded-lg md:rounded-xl">
+                      <div className="flex items-center gap-2 md:gap-3">
+                        <div className="w-6 h-6 md:w-7 md:h-7 bg-white/5 p-1 rounded-lg">
                           <img 
                             src={coin.image} 
                             referrerPolicy="no-referrer"
                             alt={coin.name} 
-                            className="w-full h-full rounded-md" 
+                            className="w-full h-full rounded-sm" 
                           />
                         </div>
                         <div className="flex flex-col">
-                          <span className="font-bold md:font-black text-white uppercase tracking-tight text-sm md:text-lg">{coin.symbol.toUpperCase()}</span>
-                          <span className="hidden sm:inline text-[9px] md:text-[10px] text-[#c4ff00] font-black tracking-widest uppercase">{coin.name}</span>
+                          <span className="font-black text-white uppercase tracking-tight text-[10px] md:text-xs">{coin.symbol.toUpperCase()}</span>
+                          <span className="hidden sm:inline text-[7px] text-[#c4ff00] font-black tracking-widest uppercase opacity-60 leading-none">{coin.name}</span>
                         </div>
                       </div>
                     </TableCell>
-                    <TableCell className="text-right font-bold md:font-black text-white text-sm md:text-lg whitespace-nowrap">
+                    <TableCell className="text-right font-black text-white text-[11px] md:text-sm whitespace-nowrap">
                       ${coin.current_price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: (coin.current_price < 1 ? 6 : 2) })}
                     </TableCell>
                     <TableCell className="text-right">
-                      <Badge className={`rounded-lg md:rounded-xl px-1.5 md:px-3 py-1 md:py-1.5 font-bold md:font-black text-[10px] md:text-sm border-none gap-1 ${coin.price_change_percentage_24h >= 0 ? 'bg-[#c4ff00]/10 text-[#c4ff00]' : 'bg-rose-500/10 text-rose-500'}`}>
-                        {coin.price_change_percentage_24h >= 0 ? <TrendingUp className="w-3 h-3 md:w-3.5 md:h-3.5" /> : <TrendingDown className="w-3 h-3 md:w-3.5 md:h-3.5" />}
+                      <Badge className={`rounded px-1.5 py-0.5 font-black text-[8px] md:text-[9px] border-none gap-0.5 ${coin.price_change_percentage_24h >= 0 ? 'bg-[#c4ff00]/10 text-[#c4ff00]' : 'bg-rose-500/10 text-rose-500'}`}>
+                        {coin.price_change_percentage_24h >= 0 ? <TrendingUp className="w-2 h-2" /> : <TrendingDown className="w-2 h-2" />}
                         {Math.abs(coin.price_change_percentage_24h).toFixed(1)}%
                       </Badge>
                     </TableCell>
                     <TableCell className="hidden md:table-cell text-right">
-                      <div className="w-24 md:w-32 h-12 md:h-16 ml-auto">
+                      <div className="w-16 md:w-20 h-6 md:h-8 ml-auto">
                         <ResponsiveContainer width="100%" height="100%">
                           <LineChart data={coin.sparkline_in_7d.price.map((p: number, i: number) => ({ p, i }))}>
                             <Line 

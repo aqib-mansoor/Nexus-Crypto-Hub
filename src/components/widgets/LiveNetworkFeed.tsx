@@ -50,7 +50,7 @@ export const LiveNetworkFeed = () => {
         status
       };
 
-      setEvents(prev => [newEvent, ...prev].slice(0, 5));
+      setEvents(prev => [newEvent, ...prev].slice(0, 4));
     };
 
     const interval = setInterval(generateEvent, 3000);
@@ -58,66 +58,69 @@ export const LiveNetworkFeed = () => {
   }, [coins]);
 
   return (
-    <div className="bg-black p-6 md:p-8 rounded-[2.5rem] border border-white/5 relative overflow-hidden group min-h-[450px] md:h-full flex flex-col w-full">
-      <div className="absolute top-0 right-0 p-4 md:p-8">
-        <div className="flex gap-2">
-          <div className="w-2 h-2 bg-[#c4ff00] rounded-full animate-ping" />
-          <div className="w-2 h-2 bg-[#c4ff00] rounded-full" />
+    <div className="bg-black p-4 md:p-6 rounded-2xl border border-white/5 relative overflow-hidden group min-h-[300px] md:h-full flex flex-col w-full">
+      <div className="absolute top-0 right-0 p-4 opacity-30 group-hover:opacity-100 transition-opacity">
+        <div className="flex gap-1.5">
+          <div className="w-1 h-1 bg-[#c4ff00] rounded-full animate-ping" />
+          <div className="w-1 h-1 bg-[#c4ff00] rounded-full" />
         </div>
       </div>
 
       <div className="w-full flex-1 flex flex-col">
-        <div className="flex items-center gap-4 mb-6 md:mb-8">
-          <div className="bg-[#c4ff00]/20 p-2 rounded-xl">
-            <Activity className="w-5 h-5 text-[#c4ff00]" />
+        <div className="flex items-center gap-3 mb-4 md:mb-5">
+          <div className="bg-[#c4ff00]/10 p-2 rounded-lg">
+            <Activity className="w-4 h-4 text-[#c4ff00]" />
           </div>
           <div>
-            <h3 className="text-sm font-black text-white uppercase tracking-widest">Live Execution Feed</h3>
-            <p className="text-[10px] font-black text-white/30 uppercase tracking-[0.2em]">Real-time Transaction Stream</p>
+            <h3 className="text-xs font-black text-white uppercase tracking-widest leading-none">Protocol Feed</h3>
+            <p className="text-[9px] font-black text-white/30 uppercase tracking-[0.2em] mt-1.5">Live Sync active</p>
           </div>
         </div>
 
-        <div className="flex-1 space-y-3 md:space-y-4 overflow-y-auto scrollbar-hide pr-1">
+        <div className="flex-1 space-y-4 overflow-y-auto scrollbar-hide pr-1 lg:pr-2">
           <AnimatePresence initial={false}>
             {events.map((event) => (
               <motion.div
                 key={event.id}
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                className="flex items-start gap-3 md:gap-4 p-3 md:p-4 bg-white/5 rounded-2xl border border-white/5 group/event hover:border-[#c4ff00]/20 transition-all"
+                exit={{ opacity: 0, scale: 0.98 }}
+                className="flex items-start gap-4 p-4 bg-white/[0.02] rounded-2xl border border-white/[0.03] group/event hover:border-[#c4ff00]/20 hover:bg-white/[0.04] transition-all relative overflow-hidden"
               >
-                <div className={`mt-1 h-1.5 w-1.5 rounded-full shrink-0 ${
+                <div className={`mt-2 h-1.5 w-1.5 rounded-full shrink-0 ${
                   event.status === 'SUCCESS' ? 'bg-emerald-500' : 
                   event.status === 'WARNING' ? 'bg-amber-500' : 'bg-rose-500'
-                }`} />
+                } shadow-[0_0_8px_currentColor]`} />
                 
-                <div className="min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-[8px] font-black text-white/20 uppercase tracking-widest">{event.time}</span>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center justify-between mb-1.5">
                     <span className={`text-[8px] font-black uppercase tracking-widest ${
                       event.type === 'SETTLEMENT' ? 'text-blue-400' :
                       event.type === 'LIQUIDITY' ? 'text-emerald-400' :
                       event.type === 'NODE' ? 'text-purple-400' : 'text-amber-400'
                     }`}>{event.type}</span>
+                    <span className="text-[8px] font-black text-white/10 uppercase tracking-widest">{event.time}</span>
                   </div>
-                  <p className="text-[11px] font-medium text-white/70 leading-relaxed group-hover/event:text-white transition-colors">
+                  <p className="text-[11px] md:text-sm font-medium text-white/70 leading-relaxed group-hover/event:text-white transition-colors">
                     {event.message}
                   </p>
                 </div>
+
+                {/* Subtle side indicator */}
+                <div className={`absolute left-0 top-0 bottom-0 w-[2px] opacity-0 group-hover/event:opacity-100 transition-opacity ${
+                  event.type === 'SETTLEMENT' ? 'bg-blue-400' :
+                  event.type === 'LIQUIDITY' ? 'bg-emerald-400' :
+                  event.type === 'NODE' ? 'bg-purple-400' : 'bg-amber-400'
+                }`} />
               </motion.div>
             ))}
           </AnimatePresence>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-white/5 flex items-center justify-between">
+        <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Globe className="w-3 h-3 text-white/20" />
-            <span className="text-[8px] font-black text-white/20 uppercase tracking-[0.3em]">Nexus Global Mesh v4.2</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Shield className="w-3 h-3 text-emerald-500/50" />
-            <span className="text-[8px] font-black text-emerald-500/50 uppercase tracking-widest">End-to-End Verified</span>
+            <Globe className="w-2.5 h-2.5 text-white/20" />
+            <span className="text-[7px] font-black text-white/20 uppercase tracking-[0.3em]">Nexus Mesh v4.2</span>
           </div>
         </div>
       </div>

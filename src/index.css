@@ -7,6 +7,11 @@
   
   --color-primary: #c4ff00;
   --color-secondary: #818181;
+
+  @keyframes shimmer {
+    from { transform: translateX(-100%) skewX(-20deg); }
+    to { transform: translateX(200%) skewX(-20deg); }
+  }
 }
 
 @layer base {
