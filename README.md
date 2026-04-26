@@ -27,12 +27,37 @@ NEXUS is a high-performance, institutional-grade cryptocurrency terminal designe
 - **Live Terminal Feed**: Real-time event log tracking settlement status, liquidity movements, and node health.
 - **Institutional Benchmarking**: Precision-tracking of major assets (BTC, ETH, SOL) with high-fidelity price feeds.
 
+## 📡 API & Integration Details
+
+Nexus leverages a multi-vector data architecture to provide institutional-grade intelligence:
+
+### 💼 Financial & Market Data
+- **CoinGecko API**: Primary source for high-fidelity crypto market data and historical price action.
+  - *Key: `VITE_COINGECKO_API_KEY`*
+- **ExchangeRate-API**: Real-time fiat conversion rates for global settlement simulation.
+  - *Key: `VITE_EXCHANGE_API_KEY`*
+- **Yahoo Finance (Proxy)**: Secondary macro data source for traditional financial instruments (Gold, Oil, DXY).
+- **DexScreener**: Public DEX liquidity and volume tracking for fragmented on-chain vectors.
+
+### 🧠 Intelligence & Sentiment
+- **NewsAPI (Proxy)**: Global news aggregation engine for real-time sentiment mapping.
+  - *Key: `NEWS_API_KEY`*
+- **LunarCrush**: Advanced social sentiment metrics and trending social volume analysis.
+  - *Key: `VITE_LUNARCRUSH_KEY`*
+- **Alternative.me**: Fear & Greed Index integration for aggregate market psychology.
+
+### ⛓️ On-Chain Telemetry
+- **Mempool.space**: Real-time Bitcoin network health, hashrate tracking, and mining profitability metrics.
+- **Etherscan**: Ethereum network intelligence and large-scale transaction monitoring.
+  - *Key: `VITE_ETHERSCAN_KEY`*
+- **LI.FI Protocol**: Cross-chain bridge volume and liquidity flow statistics.
+
 ## 🛠 Technical Stack
 - **Framework**: React 18 + Vite
+- **Backend**: Express.js (Node.js) for secure API proxying and server-side logic.
 - **Animations**: Framer Motion (motion/react)
 - **Styling**: Tailwind CSS (v4)
 - **Icons**: Lucide React
-- **Data Integration**: CoinGecko API for real-time market telemetry
 
 ## 🛡 Security
 - **MPC-ZK Integration**: Multi-Party Computation and Zero-Knowledge proofs for asset safety.
